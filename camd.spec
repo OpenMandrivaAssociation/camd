@@ -3,7 +3,7 @@
 %define name		camd
 %define NAME		CAMD
 %define version		2.2.0
-%define release		%mkrel 2
+%define release		%mkrel 3
 %define major		%{version}
 %define libname		%mklibname %{name} %{major}
 %define develname	%mklibname %{name} -d
@@ -43,6 +43,7 @@ Requires:	suitesparse-common-devel >= 3.0.0
 Requires:	%{libname} = %{epoch}:%{version}-%{release}
 Provides:	%{name}-devel = %{epoch}:%{version}-%{release}
 Obsoletes: 	%mklibname %name 2 -d
+Obsoletes:	%mklibname %name 2 -d -s
 
 %description -n %{develname}
 CAMD provides a set of routines for permuting sparse matricies prior
