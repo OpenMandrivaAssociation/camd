@@ -3,7 +3,7 @@
 %define name		camd
 %define NAME		CAMD
 %define version		2.2.0
-%define release		%mkrel 4
+%define release		%mkrel 5
 %define major		%{version}
 %define libname		%mklibname %{name} %{major}
 %define develname	%mklibname %{name} -d
@@ -92,11 +92,11 @@ done
 
 %files -n %{libname}
 %defattr(-,root,root)
-%{_docdir}/%{name}
 %{_libdir}/*.so.*
 
 %files -n %{develname}
 %defattr(-,root,root)
+%{_docdir}/%{name}
 %{_includedir}/*
 %{_libdir}/*.so
 %{_libdir}/*.a
