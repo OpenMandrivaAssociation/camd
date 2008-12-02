@@ -3,7 +3,7 @@
 %define name		camd
 %define NAME		CAMD
 %define version		2.2.0
-%define release		%mkrel 8
+%define release		%mkrel 9
 %define major		%{version}
 %define libname		%mklibname %{name} %{major}
 %define develname	%mklibname %{name} -d
@@ -11,12 +11,13 @@
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
+Epoch:		%{epoch}
 Summary:	Routines for permuting sparse matricies prior to factorization
 Group:		System/Libraries
 License:	LGPL
 URL:		http://www.cise.ufl.edu/research/sparse/camd/
 Source0:	http://www.cise.ufl.edu/research/sparse/camd/%{NAME}-%{version}.tar.gz
-Source1:	http://www.cise.ufl.edu/research/sparse/ufconfig/UFconfig-3.1.0.tar.gz
+Source1:	http://www.cise.ufl.edu/research/sparse/ufconfig/UFconfig-3.2.0.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %description
