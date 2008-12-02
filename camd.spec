@@ -3,7 +3,7 @@
 %define name		camd
 %define NAME		CAMD
 %define version		2.2.0
-%define release		%mkrel 7
+%define release		%mkrel 8
 %define major		%{version}
 %define libname		%mklibname %{name} %{major}
 %define develname	%mklibname %{name} -d
@@ -27,6 +27,7 @@ to factorization.
 Summary:	Library of routines for permuting sparse matricies prior to factorization
 Group:		System/Libraries
 Provides:	%{libname} = %{epoch}:%{version}-%{release}
+Obsoletes:	%mklibname %{name} 2
 
 %description -n %{libname}
 CAMD provides a set of routines for permuting sparse matricies prior
@@ -41,8 +42,8 @@ Group:		Development/C
 Requires:	suitesparse-common-devel >= 3.0.0
 Requires:	%{libname} = %{epoch}:%{version}-%{release}
 Provides:	%{name}-devel = %{epoch}:%{version}-%{release}
-Obsoletes: 	%mklibname %name 2 -d
-Obsoletes:	%mklibname %name 2 -d -s
+Obsoletes: 	%mklibname %{name} 2 -d
+Obsoletes:	%mklibname %{name} 2 -d -s
 
 %description -n %{develname}
 CAMD provides a set of routines for permuting sparse matricies prior
