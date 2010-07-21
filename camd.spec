@@ -2,8 +2,8 @@
 
 %define name		camd
 %define NAME		CAMD
-%define version		2.2.0
-%define release		%mkrel 11
+%define version		2.2.1
+%define release		%mkrel 1
 %define major		%{version}
 %define libname		%mklibname %{name} %{major}
 %define develname	%mklibname %{name} -d
