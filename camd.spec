@@ -1,24 +1,18 @@
-%define epoch		0
-
-%define name		camd
 %define NAME		CAMD
-%define version		2.2.2
-%define release		%mkrel 1
 %define major		%{version}
 %define libname		%mklibname %{name} %{major}
 %define develname	%mklibname %{name} -d
 
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
-Epoch:		%{epoch}
+Name:		camd
+Version:	2.3.1
+Release:	1
+Epoch:		1
 Summary:	Routines for permuting sparse matricies prior to factorization
 Group:		System/Libraries
 License:	LGPL
 URL:		http://www.cise.ufl.edu/research/sparse/camd/
 Source0:	http://www.cise.ufl.edu/research/sparse/camd/%{NAME}-%{version}.tar.gz
-BuildRoot:	%{_tmppath}/%{name}-%{version}
-BuildRequires:	suitesparse-common-devel >= 3.2.0-2
+BuildRequires:	suitesparse-common-devel >= 4.0.0
 
 %description
 CAMD provides a set of routines for permuting sparse matricies prior
@@ -27,8 +21,6 @@ to factorization.
 %package -n %{libname}
 Summary:	Library of routines for permuting sparse matricies prior to factorization
 Group:		System/Libraries
-Provides:	%{libname} = %{epoch}:%{version}-%{release}
-Obsoletes:	%mklibname %{name} 2
 
 %description -n %{libname}
 CAMD provides a set of routines for permuting sparse matricies prior
@@ -40,11 +32,9 @@ linked against %{NAME}.
 %package -n %{develname}
 Summary:	C routines for permuting sparse matricies prior to factorization
 Group:		Development/C
-Requires:	suitesparse-common-devel >= 3.0.0
-Requires:	%{libname} = %{epoch}:%{version}-%{release}
-Provides:	%{name}-devel = %{epoch}:%{version}-%{release}
-Obsoletes: 	%mklibname %{name} 2 -d
-Obsoletes:	%mklibname %{name} 2 -d -s
+Requires:	suitesparse-common-devel >= 4.0.0
+Requires:	%{libname} = %{EVRD}
+Provides:	%{name}-devel = %{EVRD}
 
 %description -n %{develname}
 CAMD provides a set of routines for permuting sparse matricies prior
@@ -54,19 +44,21 @@ This package contains the files needed to develop applications which
 use %{name}.
 
 %prep
-%setup -q -c 
-%setup -q -D -n %{name}-%{version}/%{NAME}
-mkdir ../UFconfig
-ln -sf %{_includedir}/suitesparse/UFconfig.* ../UFconfig
+%setup -q -c -n %{name}-%{version}
+cd %{NAME}
+find . -perm 0640 | xargs chmod 0644
+mkdir ../SuiteSparse_config
+ln -sf %{_includedir}/suitesparse/SuiteSparse_config.* ../SuiteSparse_config
 
 %build
+cd %{NAME}
 pushd Lib
     %make -f GNUmakefile CC=%__cc CFLAGS="%{optflags} -fPIC -I%{_includedir}/suitesparse" INC=
     %__cc -shared -Wl,-soname,lib%{name}.so.%{major} -o lib%{name}.so.%{version} -lm *.o
 popd
 
 %install
-%__rm -rf %{buildroot}
+cd %{NAME}
 
 %__install -d -m 755 %{buildroot}%{_libdir} 
 %__install -d -m 755 %{buildroot}%{_includedir}/suitesparse 
@@ -86,24 +78,12 @@ done
 %__install -d -m 755 %{buildroot}%{_docdir}/%{name}
 %__install -m 644 README.txt Doc/*.txt Doc/*.pdf Doc/ChangeLog Doc/License %{buildroot}%{_docdir}/%{name}
 
-%clean
-%__rm -rf %{buildroot}
-
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
-
 %files -n %{libname}
-%defattr(-,root,root)
 %{_libdir}/*.so.*
 
 %files -n %{develname}
-%defattr(-,root,root)
 %{_docdir}/%{name}
 %{_includedir}/*
 %{_libdir}/*.so
 %{_libdir}/*.a
+
