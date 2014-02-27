@@ -1,11 +1,11 @@
 %define NAME		CAMD
-%define major		%{version}
+%define major		2
 %define libname		%mklibname %{name} %{major}
 %define develname	%mklibname %{name} -d
 
 Name:		camd
 Version:	2.3.1
-Release:	1
+Release:	2
 Epoch:		1
 Summary:	Routines for permuting sparse matricies prior to factorization
 Group:		System/Libraries
