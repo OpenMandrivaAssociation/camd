@@ -80,7 +80,7 @@ install -d -m 755 %{buildroot}%{_docdir}/%{name}
 install -m 644 README.txt Doc/*.txt Doc/*.pdf Doc/ChangeLog Doc/License %{buildroot}%{_docdir}/%{name}
 
 %files -n %{libname}
-%{_libdir}/lib%{name}.so**
+%{_libdir}/lib%{name}.so.*
 
 %files -n %{devname}
 %{_docdir}/%{name}
