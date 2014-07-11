@@ -5,7 +5,7 @@
 
 Name:		camd
 Version:	2.3.1
-Release:	3
+Release:	4
 Epoch:		1
 Summary:	Routines for permuting sparse matricies prior to factorization
 Group:		System/Libraries
